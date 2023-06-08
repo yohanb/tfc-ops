@@ -244,7 +244,8 @@ type WorkspaceUpdateParams struct {
 }
 
 // ConvertHCLVariable changes a TFVar struct in place by escaping
-//  the double quotes and line endings in the Value attribute
+//
+//	the double quotes and line endings in the Value attribute
 func ConvertHCLVariable(tfVar *TFVar) {
 	if !tfVar.Hcl {
 		return
@@ -616,11 +617,13 @@ func CreateWorkspace(oc OpsConfig, vcsTokenID string) (string, error) {
 }
 
 // RunTFInit ...
-//  - removes old terraform.tfstate files
-//  - runs terraform init with old versions
-//  - runs terraform init with new version
+//   - removes old terraform.tfstate files
+//   - runs terraform init with old versions
+//   - runs terraform init with new version
+//
 // NOTE: This procedure can be used to copy/migrate a workspace's state to a new one.
-//  (see the -backend-config mention below and the backend.tf file in this repo)
+//
+//	(see the -backend-config mention below and the backend.tf file in this repo)
 func RunTFInit(oc OpsConfig, tfToken, tfTokenDestination string) error {
 	var tfInit string
 	var err error
@@ -696,9 +699,12 @@ func RunTFInit(oc OpsConfig, tfToken, tfTokenDestination string) error {
 }
 
 // CloneWorkspace gets the data, variables and team access data for an existing Terraform Cloud workspace
-//  and then creates a clone of it with the same data.
+//
+//	and then creates a clone of it with the same data.
+//
 // If the copyVariables param is set to true, then all the non-sensitive variable values will be added to the new
-//   workspace.  Otherwise, they will be set to "REPLACE_THIS_VALUE"
+//
+//	workspace.  Otherwise, they will be set to "REPLACE_THIS_VALUE"
 func CloneWorkspace(cfg CloneConfig) ([]string, error) {
 	wsData, err := GetWorkspaceData(cfg.Organization, cfg.SourceWorkspace)
 	if err != nil {
@@ -795,7 +801,8 @@ func CloneWorkspace(cfg CloneConfig) ([]string, error) {
 
 // AddOrUpdateVariable adds or updates an existing Terraform Cloud workspace variable
 // If the copyVariables param is set to true, then all the non-sensitive variable values will be added to the new
-//   workspace.  Otherwise, they will be set to "REPLACE_THIS_VALUE"
+//
+//	workspace.  Otherwise, they will be set to "REPLACE_THIS_VALUE"
 func AddOrUpdateVariable(cfg UpdateConfig) (string, error) {
 	variables, err := GetVarsFromWorkspace(cfg.Organization, cfg.Workspace)
 	if err != nil {
