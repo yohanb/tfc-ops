@@ -14,6 +14,11 @@ func callAPI(method, url, postData string, headers map[string]string) *http.Resp
 	var err error
 	var req *http.Request
 
+	proxy := os.Getenv("HTTP_PROXY")
+	if proxy != "" {
+		fmt.Println("Using proxy: " + proxy)
+	}
+
 	if postData != "" {
 		req, err = http.NewRequest(method, url, strings.NewReader(postData))
 	} else {

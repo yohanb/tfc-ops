@@ -1,0 +1,45 @@
+// Copyright © 2018-2022 SIL International
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package cmd
+
+import (
+	"fmt"
+	"github.com/silinternational/tfc-ops/lib"
+	"github.com/spf13/cobra"
+)
+
+var providerVersionListCmd = &cobra.Command{
+	Use:   "list",
+	Short: "Report on provider version",
+	Long:  `Show the values of variables with a key or value containing a certain string`,
+	Args:  cobra.ExactArgs(0),
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Printf("Getting list versions for provider '%s' in namespace '%s' ...\n", providerName, providerNamespace)
+		allData, err := lib.GetAllProviderVersions(organization, providerNamespace, providerName)
+		if err != nil {
+			fmt.Println(err.Error())
+			return
+		}
+
+		for _, providerVersion := range allData {
+			fmt.Println(providerVersion.Attributes.Version)
+		}
+	},
+}
+
+func init() {
+	providerVersionCmd.AddCommand(providerVersionListCmd)
+	addProviderRelatedFlags(providerVersionListCmd)
+}

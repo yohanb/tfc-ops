@@ -18,15 +18,13 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// providersCmd represents the top level command for variables
-var providersCmd = &cobra.Command{
-	Use:   "providers",
-	Short: "Configure registry providers",
-	Long:  `Top level command to configure your private registry providers in Terraform Cloud`,
+var providerVersionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "Configure registry provider version",
+	Long:  `Command to configure your private registry provider version`,
 	Args:  cobra.MinimumNArgs(1),
 }
 
 func init() {
-	rootCmd.AddCommand(providersCmd)
-	addGlobalFlags(providersCmd)
+	providerCmd.AddCommand(providerVersionCmd)
 }

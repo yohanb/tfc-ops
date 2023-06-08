@@ -20,10 +20,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var providersListCmd = &cobra.Command{
+var providerListCmd = &cobra.Command{
 	Use:   "list",
-	Short: "Report on providers",
-	Long:  `Show the values of variables with a key or value containing a certain string`,
+	Short: "list registered providers",
+	Long:  `Show the values of providers with a key or value containing a certain string`,
 	Args:  cobra.ExactArgs(0),
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("Getting list of providers ...")
@@ -40,5 +40,5 @@ var providersListCmd = &cobra.Command{
 }
 
 func init() {
-	providersCmd.AddCommand(providersListCmd)
+	providerCmd.AddCommand(providerListCmd)
 }
